@@ -3,25 +3,52 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+
   </head>
   <body>
     <script>
-
+    // executes the function only when the document has loaded
       $(document).ready(function(){
+        // setting jquery body to the body element
         var $body = $('body');
+        // clears the body element
         $body.html('');
 
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          $tweet.text(index + '@' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body);
           index -= 1;
         }
+        // new code under here after the for loop ends
+        var $txt = $('<div></div>');
+        var $button = $('<button>Show Most Recent Twits</button>').click(function () {
+          alert('hello there');
+        })
+        // sets the $txt variable to an empty div called
+          // can input text between the divs to have text show up on the screen
+        $txt.text('random string of text');
+          // can also use the text method to have new text show up
+        $txt.prependTo($body);
+        $button.appendTo($body);
+
+          // appends to the body
+
+
 
       });
 
     </script>
   </body>
 </html>
+
+
+<!--
+1. add new tweets to the page automatically
+2. have button show new tweets
+3. add timestamps of when the tweet was actually made
+4. design the page
+5. allow click on user to see the user's timelime
+ -->
