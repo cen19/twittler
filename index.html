@@ -7,7 +7,11 @@
   </head>
   <body>
     <script>
-    // executes the function only when the document has loaded
+
+      function getUserTweets(userName) {
+        return streams.users.userName;
+      }
+      // executes the function only when the document has loaded
       $(document).ready(function(){
         // setting jquery body to the body element
         var $body = $('body');
@@ -15,28 +19,44 @@
         $body.html('');
 
         var index = streams.home.length - 1;
+        var index1 = 0;
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
+          var date = new Date();
+          var dateFormatted = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+          var $dateFormatted =  $('<div></div>');
           $tweet.text(index + '@' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body);
+          $dateFormatted.text('Sent at ' + dateFormatted);
+          $dateFormatted.appendTo($tweet);
           index -= 1;
+          index1 += 1;
         }
         // new code under here after the for loop ends
-        var $txt = $('<div></div>');
+
         var $button = $('<button>Show Most Recent Twits</button>').click(function () {
-          alert('hello there');
-        })
-        // sets the $txt variable to an empty div called
-          // can input text between the divs to have text show up on the screen
-        $txt.text('random string of text');
-          // can also use the text method to have new text show up
-        $txt.prependTo($body);
-        $button.appendTo($body);
+          // using a stop variable to have it start listing 'in reverse'
+          var stop = streams.home.length - 1;
+          while(stop >= index1){
+            var tweet = streams.home[index1];
+            var $tweet = $('<div></div>');
+            var date = new Date();
+            var dateFormatted = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+            var $dateFormatted =  $('<div></div>');
 
-          // appends to the body
+            $tweet.text(index1 + '@' + tweet.user + ': ' + tweet.message);
+            $tweet.prependTo($body);
+            $dateFormatted.text('Sent at ' + dateFormatted);
+            $dateFormatted.appendTo($tweet);
+            index -= 1;
+            index1 += 1;
+            $button.prependTo($body);
+        }
 
+        });
 
+        $button.prependTo($body);
 
       });
 
